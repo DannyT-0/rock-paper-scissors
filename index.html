@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock-Paper-Scissors</title>
+</head>
+
+<body>
+    <script>
+
+        function computerPlay() {
+            let arr = ["rock", "paper", "scissors"];
+            let randomChoice = (Math.floor(Math.random() * 3));
+            return (arr[randomChoice])
+        }
+
+        // This function is for picking a random choice from rock paper scissors for the computer
+
+
+        // function playRound(playerSelection, computerSelection) {
+        //     if (playerSelection == "rock" && computerSelection == "scissors") {
+        //         return `You win! ${playerSelection} beats ${computerSelection}`;
+        //     } else if (playerSelection == "scissors" && computerSelection == "rock") {
+        //         return `You lose! ${computerSelection} beats ${playerSelection}`;
+        //     } else if (playerSelection == "paper" && computerSelection == "rock") {
+        //         return `You win! ${playerSelection} beats ${computerSelection}`;
+        //     } else if (playerSelection == "rock" && computerSelection == "paper") {
+        //         return `You lose! ${computerSelection} beats ${playerSelection}`;
+        //     } else if (playerSelection == "scissors" && computerSelection == "paper") {
+        //         return `You win! ${playerSelection} beats ${computerSelection}`;
+        //     } else if (playerSelection == "paper" && computerSelection == "scissors") {
+        //         return `You lose! ${computerSelection} beats ${playerSelection}`;
+        //     } else {
+        //         return "It was a tie! Play again!";
+        //     }
+        // } This was an unused function in my first draft. I want to keep it here because I forgot to commit to github before I changed things around. 
+
+
+        function playRound() {
+            let userPlay = prompt("What is your play?");
+            let computerSelection = computerPlay();
+            let playerSelection = userPlay.toLowerCase();
+
+            if (playerSelection === computerSelection) {
+                return "It was a tie!"
+            } else if ((playerSelection === "rock" && computerSelection === "scissors")
+                || (playerSelection === "paper" && computerSelection === "rock")
+                || (playerSelection === "scissors" && computerSelection === "paper")) {
+                return 1;
+            } else {
+                return 2;
+            }
+        }
+
+        // This function is for letting the user know if they won or lost the game of rock, paper, scissors or the computer. 
+        // Unsure if there is a better way to do this other than the if...else if statements. It looks a bit clunky
+
+
+        function game() {
+            let playerScore = 0;
+            let computerScore = 0;
+
+            for (let i = 0; i < 5; i++) {
+                let gameResults = playRound();
+                if (gameResults === 1) {
+                    playerScore++;
+                    console.log(gameResults);
+                } else if (gameResults === 2) {
+                    computerScore++;
+                    console.log(gameResults);
+                }
+            }
+
+            if (playerScore > computerScore) {
+                return ("The user wins!");
+            } else if (computerScore > playerScore) {
+                return ("The computer wins!");
+            } else {
+                return ("It's a tie!");
+            }
+        }
+        // This function is for the game itself to loop over five times
+
+
+
+    </script>
+
+
+
+
+</body>
+
+</html>
