@@ -8,7 +8,48 @@
 </head>
 
 <body>
+
+    <button id="rockbtn">Rock</button>
+    <button id="paperbtn">Paper</button>
+    <button id="scissorsbtn">Scissors</button>
+
+
+    <div>
+        <h3 id="results">Results:</h3>
+        <h4 id="playerScore">Player Score</h4>
+        <h4 id="computerScore">Computer Score</h4>
+    </div>
+
+
+
+
+
+
+
+
     <script>
+
+
+
+
+        const rockbtn = document.querySelector("#rockbtn");
+        const paperbtn = document.querySelector("#paperbtn");
+        const scissorsbtn = document.querySelector("#scissorsbtn");
+
+
+        rockbtn.addEventListener('click', gamePlayRock);
+        paperbtn.addEventListener('click', gamePlayPaper);
+        scissorsbtn.addEventListener('click', gamePlayScissors);
+
+
+        const playerScoreKeeper = document.querySelector("#playerScore");
+        const computerScoreKeeper = document.querySelector("#computerScore");
+        const resultKeeper = document.querySelector("#results");
+
+
+        let playerScore = 0;
+        let computerScore = 0;
+
 
         function computerPlay() {
             let arr = ["rock", "paper", "scissors"];
@@ -16,72 +57,138 @@
             return (arr[randomChoice])
         }
 
-        // This function is for picking a random choice from rock paper scissors for the computer
 
-
-        // function playRound(playerSelection, computerSelection) {
-        //     if (playerSelection == "rock" && computerSelection == "scissors") {
-        //         return `You win! ${playerSelection} beats ${computerSelection}`;
-        //     } else if (playerSelection == "scissors" && computerSelection == "rock") {
-        //         return `You lose! ${computerSelection} beats ${playerSelection}`;
-        //     } else if (playerSelection == "paper" && computerSelection == "rock") {
-        //         return `You win! ${playerSelection} beats ${computerSelection}`;
-        //     } else if (playerSelection == "rock" && computerSelection == "paper") {
-        //         return `You lose! ${computerSelection} beats ${playerSelection}`;
-        //     } else if (playerSelection == "scissors" && computerSelection == "paper") {
-        //         return `You win! ${playerSelection} beats ${computerSelection}`;
-        //     } else if (playerSelection == "paper" && computerSelection == "scissors") {
-        //         return `You lose! ${computerSelection} beats ${playerSelection}`;
-        //     } else {
-        //         return "It was a tie! Play again!";
-        //     }
-        // } This was an unused function in my first draft. I want to keep it here because I forgot to commit to github before I changed things around. 
-
-
-        function playRound() {
-            let userPlay = prompt("What is your play?");
+        function playRoundRock() {
+            let playerSelection = "rock";
             let computerSelection = computerPlay();
-            let playerSelection = userPlay.toLowerCase();
+
 
             if (playerSelection === computerSelection) {
-                return "It was a tie!"
-            } else if ((playerSelection === "rock" && computerSelection === "scissors")
-                || (playerSelection === "paper" && computerSelection === "rock")
-                || (playerSelection === "scissors" && computerSelection === "paper")) {
-                return 1;
+                console.log("Tie Round")
+            } else if (computerSelection === "scissors") {
+                playerScore++;
+                console.log(playerScore, "player point");
+                const scoreCheck = document.createElement("p");
+                scoreCheck.textContent = playerScore;
+                playerScoreKeeper.appendChild(scoreCheck);
+
+
             } else {
-                return 2;
+                computerScore++;
+                console.log(computerScore, "computer point");
+                const scoreCheck = document.createElement("p");
+                scoreCheck.textContent = computerScore;
+                computerScoreKeeper.appendChild(scoreCheck);
+
+
             }
         }
 
-        // This function is for letting the user know if they won or lost the game of rock, paper, scissors or the computer. 
-        // Unsure if there is a better way to do this other than the if...else if statements. It looks a bit clunky
+        function playRoundPaper() {
+            let playerSelection = "paper";
+            let computerSelection = computerPlay();
 
+            if (playerSelection === computerSelection) {
+                console.log("Tie round!");
+            } else if (computerSelection === "rock") {
+                playerScore++;
+                console.log(playerScore, "player point")
+                const scoreCheck = document.createElement("p");
+                scoreCheck.textContent = playerScore;
+                playerScoreKeeper.appendChild(scoreCheck);
 
-        function game() {
-            let playerScore = 0;
-            let computerScore = 0;
-
-            for (let i = 0; i < 5; i++) {
-                let gameResults = playRound();
-                if (gameResults === 1) {
-                    playerScore++;
-                    console.log(gameResults);
-                } else if (gameResults === 2) {
-                    computerScore++;
-                    console.log(gameResults);
-                }
-            }
-
-            if (playerScore > computerScore) {
-                return ("The user wins!");
-            } else if (computerScore > playerScore) {
-                return ("The computer wins!");
             } else {
-                return ("It's a tie!");
+                computerScore++;
+                console.log(computerScore, "computer point")
+                const scoreCheck = document.createElement("p");
+                scoreCheck.textContent = computerScore;
+                computerScoreKeeper.appendChild(scoreCheck);
+
             }
         }
-        // This function is for the game itself to loop over five times
+
+        function playRoundScissors() {
+            let playerSelection = "scissors";
+            let computerSelection = computerPlay();
+
+
+            if (playerSelection === computerSelection) {
+                console.log("Tie round!");
+            } else if (computerSelection === "paper") {
+                playerScore++;
+                console.log(playerScore, "player point");
+                const scoreCheck = document.createElement("p");
+                scoreCheck.textContent = playerScore;
+                playerScoreKeeper.appendChild(scoreCheck);
+
+            } else {
+                computerScore++;
+                console.log(computerScore, "computer score");
+                const scoreCheck = document.createElement("p");
+                scoreCheck.textContent = computerScore;
+                computerScoreKeeper.appendChild(scoreCheck);
+
+            }
+        }
+
+
+
+        function gamePlayRock() {
+            playRoundRock();
+
+            if (playerScore == 5) {
+                console.log("The user wins!");
+                const gameResults = document.createElement("p");
+                gameResults.textContent = "The user wins!";
+                resultKeeper.appendChild(gameResults);
+            } else if (computerScore == 5) {
+                console.log("The computer wins!");
+                const gameResults = document.createElement("p");
+                gameResults.textContent = "The computer wins!";
+                resultKeeper.appendChild(gameResults);
+            } else {
+                console.log("The game is still on!");
+            }
+        }
+
+
+        function gamePlayPaper() {
+            playRoundPaper();
+
+            if (playerScore == 5) {
+                console.log("The user wins!");
+                const gameResults = document.createElement("p");
+                gameResults.textContent = "The user wins!";
+                resultKeeper.appendChild(gameResults);
+            } else if (computerScore == 5) {
+                console.log("The computer wins!");
+                const gameResults = document.createElement("p");
+                gameResults.textContent = "The computer wins!";
+                resultKeeper.appendChild(gameResults);
+            } else {
+                console.log("The game is still on!");
+            }
+        }
+
+        function gamePlayScissors() {
+            playRoundScissors();
+
+            if (playerScore == 5) {
+                console.log("The user wins!");
+                const gameResults = document.createElement("p");
+                gameResults.textContent = "The user wins!";
+                resultKeeper.appendChild(gameResults);
+            } else if (computerScore == 5) {
+                console.log("The computer wins!");
+                const gameResults = document.createElement("p");
+                gameResults.textContent = "The computer wins!";
+                resultKeeper.appendChild(gameResults);
+            } else {
+                console.log("The game is still on!");
+            }
+        }
+
+
 
 
 
